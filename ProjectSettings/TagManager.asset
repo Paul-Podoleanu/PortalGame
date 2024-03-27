@@ -8,6 +8,8 @@ TagManager:
   - FirstPortal
   - SecondPortal
   - Wall
+  - PortalShot
+  - Floor
   layers:
   - Default
   - TransparentFX

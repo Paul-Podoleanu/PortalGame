@@ -358,6 +358,9 @@
 "Assets/Scripts/CollisionTest.cs"
 "Assets/Scripts/Movement/CameraMover.cs"
 "Assets/Scripts/Movement/PlayerMover.cs"
+"Assets/Scripts/PortalShot.cs"
+"Assets/Scripts/WallCheck.cs"
+"Assets/Scripts/Wand.cs"
 -langversion:9.0
 
 /deterministic

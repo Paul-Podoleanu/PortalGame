@@ -43,7 +43,7 @@ public class CollisionTest : MonoBehaviour
         {
             Debug.Log("Second portal collision detected");
             Vector3 position = firstPortal.transform.position;
-            transform.position = position + new Vector3(-1, 0, 0);
+            transform.position = position + new Vector3(-1 , 0, 0);
         }
     }
 

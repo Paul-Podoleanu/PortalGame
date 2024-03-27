@@ -24,7 +24,6 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
-        /**/
         //Move the player horizontally without pressing specific keys
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * _MovementSpeed * Time.deltaTime);
