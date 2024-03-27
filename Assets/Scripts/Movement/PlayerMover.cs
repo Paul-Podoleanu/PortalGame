@@ -8,6 +8,14 @@ public class PlayerMover : MonoBehaviour
     [SerializeField]
     int _MovementSpeed, _JumpForce;
 
+    [SerializeField]
+    Transform _orientation;
+
+    float horizontalInput;
+    float verticalInput;
+
+    Vector3 moveDirection;
+
     void Start()
     {
         
@@ -16,6 +24,7 @@ public class PlayerMover : MonoBehaviour
 
     void Update()
     {
+        /**/
         //Move the player horizontally without pressing specific keys
         float horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * horizontalInput * _MovementSpeed * Time.deltaTime);
@@ -24,12 +33,14 @@ public class PlayerMover : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.forward * verticalInput * _MovementSpeed * Time.deltaTime);
 
+        moveDirection = _orientation.forward * verticalInput + _orientation.right * horizontalInput;
+
         //When the Space key is pressed, move the player up
-        //Apply force to the player to make it jump
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GetComponent<Rigidbody>().AddForce(Vector3.up * _JumpForce, ForceMode.Impulse);
         }
-
+        
     }
+
 }

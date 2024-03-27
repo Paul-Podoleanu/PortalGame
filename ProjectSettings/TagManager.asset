@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Portal
+  - FirstPortal
+  - SecondPortal
+  - Wall
   layers:
   - Default
   - TransparentFX
