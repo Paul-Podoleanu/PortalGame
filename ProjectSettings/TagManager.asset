@@ -10,6 +10,8 @@ TagManager:
   - Wall
   - PortalShot
   - Floor
+  - Spike
+  - End
   layers:
   - Default
   - TransparentFX

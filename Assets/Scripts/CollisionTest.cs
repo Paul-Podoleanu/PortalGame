@@ -45,6 +45,21 @@ public class CollisionTest : MonoBehaviour
             Vector3 position = firstPortal.transform.position;
             transform.position = position + new Vector3(-1 , 0, 0);
         }
+
+        if (other.gameObject.tag == "Spike")
+        {
+            ReloadScene();
+        }
+
+        if (other.gameObject.tag == "End")
+        {
+            Debug.Log("Level finished");
+        }
+    }
+
+    void ReloadScene()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
 }
