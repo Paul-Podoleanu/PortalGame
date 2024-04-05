@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Wand : MonoBehaviour
 {
@@ -10,27 +11,38 @@ public class Wand : MonoBehaviour
     GameObject bulletPrefab;
     [SerializeField]
     float bulletSpeed = 10f;
+    Camera mainCamera;
+
+    private void Start()
+    {
+        mainCamera = Camera.main;
+    }
 
     void Update()
-{
-    /*
-    if (Input.GetMouseButtonDown(0))
     {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
-        rb.velocity = bulletSpawnPoint.forward * bulletSpeed;
-    }*/
+        /*
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.velocity = bulletSpawnPoint.forward * bulletSpeed;
+        }*/
 
-  //When Q is presset, the player will shoot a bullet
-    if (Input.GetKeyDown(KeyCode.Q))
-    {
-        GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-        bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * bulletSpeed;
+      //When Q is presset, the player will shoot a bullet
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            //Vector3 spawnPosition = mainCamera.transform.position;
+            Vector3 spawnDirection = mainCamera.transform.forward;
 
-        //Wait for 2 seconds then destroy the bullet
-        Destroy(bullet, 2);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.velocity = spawnDirection * bulletSpeed;
+
+            //Wait for 2 seconds then destroy the bullet
+            Destroy(bullet, 2);
+        }
     }
-}
 
 }
 
