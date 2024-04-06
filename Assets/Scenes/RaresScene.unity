@@ -610,9 +610,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3464627286037995871, guid: 7cc3195abdd46a24e81a323b196ecc1b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3588619544476946640, guid: 7cc3195abdd46a24e81a323b196ecc1b, type: 3}
       propertyPath: m_Name
       value: PortalTen
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759816602705837595, guid: 7cc3195abdd46a24e81a323b196ecc1b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

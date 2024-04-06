@@ -5,10 +5,10 @@ using UnityEngine;
 public class CollisionTest : MonoBehaviour
 {
     [SerializeField]
-    private GameObject firstPortal;
+    public GameObject firstPortal;
     
     [SerializeField]
-    private GameObject secondPortal;
+    public GameObject secondPortal;
 
 
     void Start()

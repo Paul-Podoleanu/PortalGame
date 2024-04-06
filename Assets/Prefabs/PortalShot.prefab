@@ -180,3 +180,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 323a338b9f712034fa06085fed40dd5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collisionTest: {fileID: 0}
+  portalPrefab: {fileID: 3588619544476946640, guid: 7cc3195abdd46a24e81a323b196ecc1b, type: 3}
