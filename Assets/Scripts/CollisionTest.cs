@@ -26,8 +26,31 @@ public class CollisionTest : MonoBehaviour
         //If the object collides with an object that has the tag "Portal1", print "Collision Detected"
         if (collision.gameObject.tag == "FirstPortal")
         {
-            Debug.Log("Collision Detected");
+            Debug.Log("First Portal collision detected");
+            //Check if the second portal exists
+            if (secondPortal != null)
+            {
+                //Get the position of the second portal
+                Vector3 position = secondPortal.transform.position;
+                //Set the position of the object to the position of the second portal
+                transform.position = position + new Vector3(1, 0, 0);
+            }
         }
+
+        if (collision.gameObject.tag == "SecondPortal")
+        {
+            Debug.Log("Second portal collision detected");
+            //Check if the first portal exists
+            if (firstPortal != null)
+            {
+                //Get the position of the first portal
+                Vector3 position = firstPortal.transform.position;
+                //Set the position of the object to the position of the first portal
+                transform.position = position + new Vector3(-1 , 0, 0);
+            }
+        }
+
+        
     }
 
     void OnTriggerEnter(Collider other)
@@ -35,6 +58,7 @@ public class CollisionTest : MonoBehaviour
         //If the object collides with an object that has the tag "Portal1", print "Collision Detected"
         if (other.gameObject.tag == "FirstPortal")
         {
+            Debug.Log("First Portal collision detected");
             Vector3 position = secondPortal.transform.position;
             transform.position = position + new Vector3(1, 0, 0);
         }
@@ -60,6 +84,36 @@ public class CollisionTest : MonoBehaviour
     void ReloadScene()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+    }
+
+    public void DestroyFirstPortal()
+    {
+        //Check if the first portal exists
+        if (firstPortal != null)
+        {
+            //Destroy the first portal
+            Destroy(firstPortal);
+        }
+    }
+
+    public void DestroySecondPortal()
+    {
+        //Check if the second portal exists
+        if (secondPortal != null)
+        {
+            //Destroy the second portal
+            Destroy(secondPortal);
+        }
+    }
+
+    public void SetFirstPortal(GameObject portal)
+    {
+        firstPortal = portal;
+    }
+
+    public void SetSecondPortal(GameObject portal)
+    {
+        secondPortal = portal;
     }
 
 }

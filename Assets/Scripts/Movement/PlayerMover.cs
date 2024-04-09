@@ -54,6 +54,19 @@ public class PlayerMover : MonoBehaviour
             GetComponent<Rigidbody>().AddForce(Vector3.up * _JumpForce, ForceMode.Impulse);
         }
 
+
+
+        // Fi the rotation of the player on the z axis si beyond 0.45, set it to 0.45 and if it is below -0.45, set it to -0.45
+        if (transform.eulerAngles.z > 0.45f && transform.eulerAngles.z < 180f)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0.45f);
+        }
+
+        if (transform.eulerAngles.z < 359.55f && transform.eulerAngles.z > 180f)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, -0.45f);
+        }
+
        
         
     }
