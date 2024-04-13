@@ -9,11 +9,14 @@ public class CollisionTest : MonoBehaviour
     
     [SerializeField]
     public GameObject secondPortal;
+    public WallCheck wallCheck;
 
 
     void Start()
     {
-        
+        wallCheck = GameObject.FindObjectOfType<WallCheck>();
+        //collisionTest = GameObject.FindObjectOfType<CollisionTest>();
+
     }
 
     void Update()
@@ -21,37 +24,6 @@ public class CollisionTest : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        //If the object collides with an object that has the tag "Portal1", print "Collision Detected"
-        if (collision.gameObject.tag == "FirstPortal")
-        {
-            Debug.Log("First Portal collision detected");
-            //Check if the second portal exists
-            if (secondPortal != null)
-            {
-                //Get the position of the second portal
-                Vector3 position = secondPortal.transform.position;
-                //Set the position of the object to the position of the second portal
-                transform.position = position + new Vector3(1, 0, 0);
-            }
-        }
-
-        if (collision.gameObject.tag == "SecondPortal")
-        {
-            Debug.Log("Second portal collision detected");
-            //Check if the first portal exists
-            if (firstPortal != null)
-            {
-                //Get the position of the first portal
-                Vector3 position = firstPortal.transform.position;
-                //Set the position of the object to the position of the first portal
-                transform.position = position + new Vector3(-1 , 0, 0);
-            }
-        }
-
-        
-    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -59,25 +31,78 @@ public class CollisionTest : MonoBehaviour
         if (other.gameObject.tag == "FirstPortal")
         {
             Debug.Log("First Portal collision detected");
-            Vector3 position = secondPortal.transform.position;
-            transform.position = position + new Vector3(1, 0, 0);
+            //Check if the second portal exists
+            if (secondPortal != null)
+            {
+                //Get the position of the second portal
+                Vector3 position = secondPortal.transform.position;
+                Quaternion rotation = secondPortal.transform.rotation * Quaternion.Euler(0, 180, 0);
+
+                Vector3 exitDirection = rotation * Vector3.left;
+                //Vector3 portalDirection = other.transform.forward;
+
+                Vector3 newPosition = position + exitDirection * 2;
+
+                transform.position = newPosition;
+            }
         }
 
         if (other.gameObject.tag == "SecondPortal")
         {
             Debug.Log("Second portal collision detected");
-            Vector3 position = firstPortal.transform.position;
-            transform.position = position + new Vector3(-1 , 0, 0);
+            //Check if the first portal exists
+            if (firstPortal != null)
+            {
+                //Get the position of the first portal
+                Vector3 position = firstPortal.transform.position;
+                Quaternion rotation = firstPortal.transform.rotation * Quaternion.Euler(0, 180, 0);
+
+                Vector3 exitDirection = rotation * Vector3.left;
+                //Vector3 portalDirection = other.transform.forward;
+
+                Vector3 newPosition = position + exitDirection * 2;
+
+                transform.position = newPosition;
+            }
         }
 
-        if (other.gameObject.tag == "Spike")
+
+        if (other.gameObject.tag == "Death")
         {
             ReloadScene();
         }
 
         if (other.gameObject.tag == "End")
         {
-            Debug.Log("Level finished");
+            Debug.Log("Player reached the finish line");
+
+            // Play the finish sound
+            //_soundManager.PlaySound(_finishSound);
+
+
+            //Check if the current level
+            switch (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex)
+            {
+                case 1:
+                    // Load the next level
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+                    break;
+                
+                case 2:
+                    // Load the next level
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(3);
+                    break;
+
+                case 3:
+                    // Load the next level
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+                    break;
+
+                default:
+                    //Reload the first level
+                    UnityEngine.SceneManagement.SceneManager.LoadScene(4);
+                    break;
+            }
         }
     }
 

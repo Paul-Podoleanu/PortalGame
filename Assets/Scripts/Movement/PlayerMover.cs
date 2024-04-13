@@ -6,7 +6,7 @@ public class PlayerMover : MonoBehaviour
 {
 
     [SerializeField]
-    int _MovementSpeed, _JumpForce;
+    int _MovementSpeed = 5, _JumpForce = 5;
 
     [SerializeField]
     Transform _orientation;
@@ -37,18 +37,20 @@ public class PlayerMover : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
         transform.Translate(Vector3.forward * verticalInput * _MovementSpeed * Time.deltaTime);
 
-        if(horizontalInput ==0 && verticalInput == 0)
+        if(horizontalInput ==0 && verticalInput == 0 )
         {
             walkingSound.mute=true;
         }
+
         if(horizontalInput != 0 || verticalInput != 0)
         {
             walkingSound.mute = false;
         }
+
         moveDirection = _orientation.forward * verticalInput + _orientation.right * horizontalInput;
 
         //When the Space key is pressed, move the player up
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGrounded())
         {
             jumpSound.Play();
             GetComponent<Rigidbody>().AddForce(Vector3.up * _JumpForce, ForceMode.Impulse);
@@ -56,7 +58,7 @@ public class PlayerMover : MonoBehaviour
 
 
 
-        // Fi the rotation of the player on the z axis si beyond 0.45, set it to 0.45 and if it is below -0.45, set it to -0.45
+        // Fit the rotation of the player on the z axis si beyond 0.45, set it to 0.45 and if it is below -0.45, set it to -0.45
         if (transform.eulerAngles.z > 0.45f && transform.eulerAngles.z < 180f)
         {
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0.45f);
@@ -67,8 +69,20 @@ public class PlayerMover : MonoBehaviour
             transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, -0.45f);
         }
 
+
+        // Exit game with the Escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
        
         
+    }
+
+    bool IsGrounded()
+    {
+        Debug.Log("IsGrounded called");
+        return Physics.Raycast(transform.position, Vector3.down, 1.0f);
     }
 
 }
